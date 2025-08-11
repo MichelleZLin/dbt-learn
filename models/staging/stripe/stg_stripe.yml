@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_stripe__payments
+    description: Staged payment data from Stripe.
+    columns:
+      - name: payment_id
+        description: Primary key for payments.
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: Foreign key to stg_orders.order_id.
+        data_tests:
+          - relationships:
+              to: ref('stg_jaffle_shop__orders')
+              field: order_id
+      - name: payment_method
+        description: Payment method.
+      - name: status
+        description: Payment status.
+      - name: amount
+        description: Payment amount in USD.
+      - name: created_at
+        description: Payment created date.
